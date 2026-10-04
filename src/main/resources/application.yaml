@@ -4,9 +4,9 @@ spring:
   application:
     name: account
   datasource:
-    url: jdbc:postgresql://localhost:5432/account_db
-    username: postgres
-    password: admin
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
