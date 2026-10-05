@@ -53,7 +53,7 @@ class AccountServiceTest {
 
         account.setCustomer(customer);
 
-        when(accountRepository.findById(accountId))
+        when(accountRepository.findByIdForUpdate(accountId))
                 .thenReturn(Optional.of(account));
 
         when(accountRepository.save(account))
@@ -70,7 +70,7 @@ class AccountServiceTest {
                 response.balance()
         );
 
-        verify(accountRepository).findById(accountId);
+        verify(accountRepository).findByIdForUpdate(accountId);
         verify(accountRepository).save(account);
     }
 
@@ -90,7 +90,7 @@ class AccountServiceTest {
 
         account.setCustomer(customer);
 
-        when(accountRepository.findById(accountId))
+        when(accountRepository.findByIdForUpdate(accountId))
                 .thenReturn(Optional.of(account));
 
         assertThrows(
@@ -101,7 +101,7 @@ class AccountServiceTest {
                 )
         );
 
-        verify(accountRepository).findById(accountId);
+        verify(accountRepository).findByIdForUpdate(accountId);
         verify(accountRepository, never())
                 .save(any(Account.class));
     }
@@ -122,7 +122,7 @@ class AccountServiceTest {
 
         account.setCustomer(customer);
 
-        when(accountRepository.findById(accountId))
+        when(accountRepository.findByIdForUpdate(accountId))
                 .thenReturn(Optional.of(account));
 
         when(accountRepository.save(account))
@@ -139,7 +139,7 @@ class AccountServiceTest {
                 response.balance()
         );
 
-        verify(accountRepository).findById(accountId);
+        verify(accountRepository).findByIdForUpdate(accountId);
         verify(accountRepository).save(account);
     }
 }

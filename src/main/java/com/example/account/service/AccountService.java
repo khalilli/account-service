@@ -10,6 +10,7 @@ import com.example.account.repository.AccountRepository;
 import com.example.account.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -69,9 +70,10 @@ public class AccountService {
         );
     }
 
+    @Transactional
     public AccountResponse deposit(UUID accountId, BigDecimal amount) {
 
-        Account account = accountRepository.findById(accountId)
+        Account account = accountRepository.findByIdForUpdate(accountId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Account not found")
                 );
@@ -83,9 +85,10 @@ public class AccountService {
         return toAccountResponse(savedAccount);
     }
 
+    @Transactional
     public AccountResponse withdraw(UUID accountId, BigDecimal amount) {
 
-        Account account = accountRepository.findById(accountId)
+        Account account = accountRepository.findByIdForUpdate(accountId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Account not found")
                 );
